@@ -18,5 +18,4 @@ public abstract class Order {
     public abstract void esperar1Segundo() throws InterruptedException;
     public abstract void escreverRobot(String texto);
 
-
 }

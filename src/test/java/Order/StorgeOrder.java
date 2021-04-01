@@ -2,7 +2,6 @@ package Order;
 
 import Support.DriverWeb;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.sikuli.hotkey.Keys;
 import org.sikuli.script.Screen;
 
@@ -33,7 +32,7 @@ public class StorgeOrder extends Order {
 
     @Override
     public void apagarComBackSpace(By elemento) throws IOException {
-       DriverWeb.getDriverReuser().findElement(elemento).sendKeys(Keys.BACKSPACE);
+        DriverWeb.getDriverReuser().findElement(elemento).sendKeys(Keys.BACKSPACE);
     }
 
     @Override
@@ -65,5 +64,8 @@ public class StorgeOrder extends Order {
     public void escreverRobot(String texto) {
         screen.type(texto);
     }
+
+
+
 
 }

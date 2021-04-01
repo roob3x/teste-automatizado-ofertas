@@ -6,6 +6,7 @@ import Support.DriverWeb;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 
 import java.io.IOException;
 
@@ -43,8 +44,9 @@ IinteracaoSeleniumJavaWeb i
     @When("product is on sale less than {double}")
     public void productIsOnSaleLessThan(Double price) throws IOException {
         i.esperarElementoExistirNaTela(TEXT_PRICE_PRODUCT,30);
-        i.vertificaProdutoMenorValorDaList(TEXT_PRICE_PRODUCT,price);
+        i.vertificaProdutoMenorValorDaListeSeleciona(TEXT_PRICE_PRODUCT,price);
         // Write code here that turns the phrase above into concrete actions
 
     }
+
 }

@@ -8,8 +8,8 @@
 Scenario Outline: Scenario: Buscar por ofertas
   Given user enjoy on extra e-comerce with "extra"
   And search for the <product>
-  When product is on sale less than <normalprice>
+  And product is on sale less than <normalprice>
   #Then do purchase
   Examples:
   | product | normalprice |
-  | "iphone 11 64gb"| 3700.0  |
+  | "iphone 12 pro max 128gb"| 3700.0  |
