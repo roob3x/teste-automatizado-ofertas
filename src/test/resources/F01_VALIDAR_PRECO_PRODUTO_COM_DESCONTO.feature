@@ -7,12 +7,6 @@ Feature: F01_VALIDAR_PRECO_PRODUTO
     And procura pelo produto <product>
     When seleciona o produto com valor mais barato <normalprice>
     Then validar que o valor corresponde a 7% de desconto do valor total do produto
-    #And seleciona comprar
-    #And seleciona continuar
-    #And validar que o valor corresponde a 7% de desconto do valor total do produto
-    #And seleciona concluir compra
-    #And preencher login
-    #And preencher senha
 
 
     Examples:
