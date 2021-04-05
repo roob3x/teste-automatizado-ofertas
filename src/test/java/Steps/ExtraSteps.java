@@ -14,6 +14,8 @@ import static Constants.URL.MAIN_PAGE;
 import static Constants.URL.MAIN_PAGE_SEARCH;
 import static Pages.Extra.HomePageExtra.INPUT_HOME_BUSCA_EXTRA;
 import static Pages.Extra.HomePageExtra.TEXT_PRICE_PRODUCT;
+import static Pages.Extra.ProductDetail.LABEL_PRICE_1X_CARTAO;
+import static Pages.Extra.ProductDetail.LABEL_PRICE_CARTAO_EXTRA;
 import static Pages.Search.MainPageSearch.INPUT_MAIN_SEARCH;
 import static Pages.Search.MainPageSearch.LABEL_TEXT_EXTRA;
 
@@ -80,7 +82,10 @@ IinteracaoSeleniumJavaWeb i
 
 
     @Then("validar que o valor corresponde a {int}% de desconto do valor total do produto")
-    public void validarQueOValorCorrespondeADeDescontoDoValorTotalDoProduto(Integer price) {
+    public void validarQueOValorCorrespondeADeDescontoDoValorTotalDoProduto(Integer porcetagem) throws IOException {
+        i.esperarElementoExistirNaTela(LABEL_PRICE_1X_CARTAO,20);
+        i.validarPrecoPorcetagem(LABEL_PRICE_1X_CARTAO,porcetagem);
+        i.validarPrecoPorcetagem(LABEL_PRICE_CARTAO_EXTRA,porcetagem);
 
 
     }

@@ -3,6 +3,7 @@ package Steps;
 import Interacao.IinteracaoSeleniumJavaWeb;
 import ReuseOrder.StorageOrderReuse;
 import Support.DriverWeb;
+import Support.GerenciaArquivoTxt;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
@@ -18,6 +19,7 @@ public class ServiceHooks {
         ServiceHooks.scenario = scenario;
         StorageOrderReuse.apagarArquivoSessionId();
         StorageOrderReuse.apagarArquivoURL();
+        GerenciaArquivoTxt.apagarArquivoPrecoTotal();
         DriverWeb.getDriver();
         DriverWeb.getDriverReuser();
     }

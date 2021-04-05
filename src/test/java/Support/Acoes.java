@@ -34,12 +34,17 @@ public interface Acoes {
         Assert.assertEquals(texto, nome);
     }
 
-    default boolean validarPrecoPorcetagem(By elemento, String texto) throws IOException {
+    default void validarPrecoPorcetagem(By elemento,int porcetagem) throws IOException {
+        double DELTA = 1e-15;
         String nome = DriverWeb.getDriverReuser().findElement(elemento).getText();
         nome = Convert.convertDoublePrice(nome);
         double valor1 = Double.parseDouble(nome);
-        //Assert.assertEquals(texto, nome);
-        return true;
+        nome = GerenciaArquivoTxt.lerArquivoUrlPrecoTotal(nome);
+        nome = Convert.convertDoublePrice(nome);
+        double valordesconto = Double.parseDouble(nome);
+        valordesconto = valordesconto*porcetagem/100;
+        double valorfinal = Double.parseDouble(nome)-valordesconto;
+        Assert.assertEquals("valor correto com desconto"+porcetagem+"%",valorfinal,valor1,DELTA);
     }
 
     default void moverParaElemento(By elemento) throws IOException {

@@ -1,10 +1,14 @@
 package Support;
 
+import org.openqa.selenium.remote.SessionId;
+
 import java.io.*;
 import java.net.URL;
 import java.util.Scanner;
 
-import static Constants.Constant.PRODUTO_VALOR_PRECO_TOTAL;
+import static Constants.Constant.*;
+import static Constants.Constant.SESSIONID_BROWSER_PATH;
+import static Constants.Constant.URL_BROWSER_PATH;
 
 public class GerenciaArquivoTxt {
 
@@ -28,4 +32,10 @@ public class GerenciaArquivoTxt {
         arq.close();
         return price;
     }
+
+    public static void apagarArquivoPrecoTotal() {
+        File file = new File(PRODUTO_VALOR_PRECO_TOTAL);
+        file.delete();
+    }
+
 }

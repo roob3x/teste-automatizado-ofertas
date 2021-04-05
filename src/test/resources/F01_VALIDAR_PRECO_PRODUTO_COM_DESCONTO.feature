@@ -17,4 +17,4 @@ Feature: F01_VALIDAR_PRECO_PRODUTO
 
     Examples:
       | product | normalprice |
-      | "iphone 12 pro max 128gb"| 8500.0 |
+      | "iphone 12 pro max 128gb"| 8999.0 |

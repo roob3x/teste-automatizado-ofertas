@@ -6,6 +6,7 @@ public class Convert {
         precostring = precostring.replace(".", "");
         precostring = precostring.replace(",", ".");
         precostring = precostring.replace(" ", "");
+        precostring = precostring.replace("-7%dedesconto", "");
         return precostring;
     }
 }
