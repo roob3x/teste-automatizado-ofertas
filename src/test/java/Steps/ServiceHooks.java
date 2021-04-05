@@ -13,7 +13,6 @@ import java.io.IOException;
 
 public class ServiceHooks {
     public static Scenario scenario;
-    IinteracaoSeleniumJavaWeb i = new IinteracaoSeleniumJavaWeb();
     @Before
     public void setUp(Scenario scenario) throws IOException {
         ServiceHooks.scenario = scenario;
