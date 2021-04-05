@@ -9,15 +9,15 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.IOException;
+import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
+import static Pages.Extra.HomePageExtra.TEXT_PRICE_PRODUCT;
+
 public interface Acoes {
 
-    //default void escrever(By elemento, String texto){
-    //    DriverWeb.getDriver().findElement(elemento).sendKeys(texto);
-    //  }
 
     default void esperarElementoExistirNaTela(By elemento, int timeout) throws IOException {
         WebDriverWait wait = new WebDriverWait(DriverWeb.getDriverReuser(), timeout);
@@ -29,9 +29,17 @@ public interface Acoes {
 
     }
 
-    default void validarQueContemTextoEsperado(By elemento, String texto) throws IOException {
+    default void validarQueContemAtributoEsperado(By elemento, String texto) throws IOException {
         String nome = DriverWeb.getDriverReuser().findElement(elemento).getAttribute("placeholder");
         Assert.assertEquals(texto, nome);
+    }
+
+    default boolean validarPrecoPorcetagem(By elemento, String texto) throws IOException {
+        String nome = DriverWeb.getDriverReuser().findElement(elemento).getText();
+        nome = Convert.convertDoublePrice(nome);
+        double valor1 = Double.parseDouble(nome);
+        //Assert.assertEquals(texto, nome);
+        return true;
     }
 
     default void moverParaElemento(By elemento) throws IOException {
@@ -41,20 +49,17 @@ public interface Acoes {
     }
 
     default void vertificaProdutoMenorValorDaListeSeleciona(By elemento, Double price) throws IOException {
+        double menorpeco = 0,maiorpreco = 0,numero = 0;
+        String locator= null,precostring,precostring2 = null;
+
         List<WebElement> listaelemento = DriverWeb.getDriverReuser().findElements(elemento);
         List<String> listapreco = new ArrayList<String>();
         for (WebElement element : listaelemento) {
-            System.out.println(element.getText());
+           // System.out.println(element.getText());
             String nome = element.getText();
             listapreco.add(nome);
-
         }
-        double menorpeco = 0;
-        double maiorpreco = 0;
-        double numero = 0;
-        String locator= null;
-        String precostring;
-        String precostring2 = null;
+
         precostring = listapreco.get(0).toString();
         precostring = Convert.convertDoublePrice(precostring);
         menorpeco = Double.parseDouble(precostring);
@@ -73,15 +78,15 @@ public interface Acoes {
             i++;
         }
         precostring = String.valueOf(menorpeco);
-        locator = DriverWeb.getDriverReuser().findElement(elemento).toString();
-        System.out.println("preco string2 = "+precostring2);
-        locator = locator.replaceAll("[2]","[contains(text(),'"+precostring2.toString()+"'"+"])");
-        System.out.println(locator);
-        //precostring = String.valueOf(menorpeco);
-
-
+        String nome = TEXT_PRICE_PRODUCT.toString().replace("[2]","[contains(text(),'"+precostring2.toString()+"')]")
+                .replace("By.xpath: ","");
+        By locator1 = By.xpath(nome);
+        WebDriverWait wait = new WebDriverWait(DriverWeb.getDriverReuser(),10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(locator1));
+        DriverWeb.getDriverReuser().findElement(locator1).click();
 
         System.out.println("menor preco =" + menorpeco);
         System.out.println("maior preco =" + maiorpreco);
+        precostring2 = GerenciaArquivoTxt.criarArquivoPrecoTotal(precostring2);
     }
 }

@@ -8,7 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
         features = "src/test/resources",
         snippets = CucumberOptions.SnippetType.CAMELCASE,
-        tags = {"@Rob"},
+        tags = {"@Rob1"},
         glue = {"Steps"},
         plugin =
                 "pretty"

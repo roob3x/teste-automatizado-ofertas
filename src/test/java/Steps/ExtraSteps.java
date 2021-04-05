@@ -49,4 +49,45 @@ IinteracaoSeleniumJavaWeb i
 
     }
 
+    @Given("usuario acessa home aplicacao {string}")
+    public void usuarioAcessaHomeAplicacao(String texto) throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        i.abrirURL(MAIN_PAGE_SEARCH);
+        i.esperarElementoExistirNaTela(INPUT_MAIN_SEARCH,10);
+        i.escreverRobot(texto);
+        i.enter();
+        i.esperarElementoExistirNaTela(LABEL_TEXT_EXTRA,5);
+        i.click(LABEL_TEXT_EXTRA);
+
+    }
+
+    @Given("procura pelo produto {string}")
+    public void procuraPeloProduto(String produto) throws IOException, InterruptedException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(INPUT_HOME_BUSCA_EXTRA,10);
+        i.escrever(INPUT_HOME_BUSCA_EXTRA,produto);
+        i.esperar1Segundo();
+        i.enter();
+    }
+
+
+    @When("seleciona o produto com valor mais barato {double}")
+    public void selecionaOProdutoComValorMaisBarato(Double normalpŕice) throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(TEXT_PRICE_PRODUCT,30);
+        i.vertificaProdutoMenorValorDaListeSeleciona(TEXT_PRICE_PRODUCT,normalpŕice);
+    }
+
+
+    @Then("validar que o valor corresponde a {int}% de desconto do valor total do produto")
+    public void validarQueOValorCorrespondeADeDescontoDoValorTotalDoProduto(Integer price) {
+
+
+    }
+
+
+
+
+
+
 }
