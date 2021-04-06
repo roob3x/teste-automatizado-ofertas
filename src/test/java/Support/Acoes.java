@@ -1,6 +1,8 @@
 package Support;
 
 import Order.Order;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -17,7 +19,7 @@ import java.util.logging.Logger;
 import static Pages.Extra.HomePageExtra.TEXT_PRICE_PRODUCT;
 
 public interface Acoes {
-
+Log Logger = LogFactory.getLog(Acoes.class);
 
     default void esperarElementoExistirNaTela(By elemento, int timeout) throws IOException {
         WebDriverWait wait = new WebDriverWait(DriverWeb.getDriverReuser(), timeout);
@@ -68,7 +70,7 @@ public interface Acoes {
         precostring = listapreco.get(0).toString();
         precostring = Convert.convertDoublePrice(precostring);
         menorpeco = Double.parseDouble(precostring);
-        for (int i = 1; i < listapreco.size(); i++) {
+        for (int i = 0; i < listapreco.size(); i++) {
             precostring = listapreco.get(i).toString();
             precostring = Convert.convertDoublePrice(precostring);
             numero = Double.parseDouble(precostring);
@@ -80,9 +82,11 @@ public interface Acoes {
                 precostring2 = listapreco.get(i).toString();
 
             }
+
             i++;
         }
         precostring = String.valueOf(menorpeco);
+        System.out.println("TEXT_PRICE_PRODUCT"+TEXT_PRICE_PRODUCT.toString());
         String nome = TEXT_PRICE_PRODUCT.toString().replace("[2]","[contains(text(),'"+precostring2.toString()+"')]")
                 .replace("By.xpath: ","");
         By locator1 = By.xpath(nome);
