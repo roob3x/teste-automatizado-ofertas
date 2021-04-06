@@ -109,8 +109,18 @@ IinteracaoSeleniumJavaWeb i
     @Given("Seleciona comprar mais produtos")
     public void selecionaComprarMaisProdutos() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(MeuCarrinho.BTN_CONTINUAR_COMPRANDO,20);
-        i.click(MeuCarrinho.BTN_CONTINUAR_COMPRANDO);
+        try {
+            i.esperarElementoExistirNaTela(MeuCarrinho.BTN_CONTINUAR_COMPRANDO_1, 5);
+            i.click(MeuCarrinho.BTN_CONTINUAR_COMPRANDO_1);
+        }
+        catch (Exception e){
+            try{
+                i.click(MeuCarrinho.BTN_CONTINUAR_COMPRANDO_2);
+            }
+            catch (Exception ex){
+                ex.printStackTrace();
+            }
+        }
     }
 
     @Then("validar que a soma do produto corresponde ao valor subtotalprodutos")
