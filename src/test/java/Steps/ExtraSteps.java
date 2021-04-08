@@ -7,17 +7,15 @@ import Pages.Extra.MeuCarrinho;
 import Pages.Extra.Origem;
 import Pages.Extra.ProductDetail;
 import Pages.Search.MainPageSearch;
+import Support.Convert;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import Tdm.TDM;
 
 import java.io.IOException;
 
-import static Constants.URL_PAGE.MAIN_PAGE_SEARCH;
-import static Pages.Extra.HomePageExtra.INPUT_HOME_BUSCA_EXTRA;
-import static Pages.Extra.HomePageExtra.TEXT_PRICE_PRODUCT;
-import static Pages.Search.MainPageSearch.INPUT_MAIN_SEARCH;
-import static Pages.Search.MainPageSearch.LABEL_TEXT_EXTRA;
+
 
 public class ExtraSteps {
     IinteracaoSeleniumJavaWeb i = new IinteracaoSeleniumJavaWeb();
@@ -36,16 +34,16 @@ public class ExtraSteps {
 
     @Given("search for the {string}")
     public void searchForThe(String produto) throws InterruptedException, IOException {
-        i.esperarElementoExistirNaTela(INPUT_HOME_BUSCA_EXTRA, 10);
-        i.escrever(INPUT_HOME_BUSCA_EXTRA, produto);
+        i.esperarElementoExistirNaTela(HomePageExtra.INPUT_HOME_BUSCA_EXTRA, 10);
+        i.escrever(HomePageExtra.INPUT_HOME_BUSCA_EXTRA, produto);
         i.esperar1Segundo();
         i.enter();
     }
 
     @When("product is on sale less than {double}")
     public void productIsOnSaleLessThan(Double price) throws IOException {
-        i.esperarElementoExistirNaTela(TEXT_PRICE_PRODUCT, 30);
-        i.vertificaProdutoMenorValorDaListeSeleciona(TEXT_PRICE_PRODUCT, price);
+        i.esperarElementoExistirNaTela(HomePageExtra.TEXT_PRICE_PRODUCT, 30);
+        i.vertificaProdutoMenorValorDaListeSeleciona(HomePageExtra.TEXT_PRICE_PRODUCT, price);
         // Write code here that turns the phrase above into concrete actions
 
     }
@@ -98,6 +96,27 @@ public class ExtraSteps {
 
     }
 
+    @When("seleciona valor total de produtos em tela")
+    public void selecionaValorTotalDeProdutosEmTela() throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        String nome = null;
+        try {
+            i.esperarElementoExistirNaTela(MeuCarrinho.LABEL_VALOR_SUBTOTAL_PRODUTO_1, 10);
+            nome = i.retornarTextoDoElemento(MeuCarrinho.LABEL_VALOR_SUBTOTAL_PRODUTO_1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                nome = i.retornarTextoDoElemento(MeuCarrinho.LABEL_VALOR_SUBTOTAL_PRODUTO_2);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        nome = Convert.convertDoublePrice(nome);
+        TDM.valortotalprodutos.setValortotal(Double.parseDouble(nome));
+        //System.out.println("valor total = "+TDM.valortotalprodutos.getValortotal());
+    }
+
     @Given("Selecionar botao continuar")
     public void selecionarBotaoContinuar() throws IOException {
         // Write code here that turns the phrase above into concrete actions
@@ -123,8 +142,16 @@ public class ExtraSteps {
     @Then("validar que a soma do produto corresponde ao valor subtotalprodutos")
     public void validarQueASomaDoProdutoCorrespondeAoValorSubtotalprodutos() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(MeuCarrinho.LABEL_VALOR_TOTAL_PRODUTO_1,10);
-        i.validarValorTotalProdutos(MeuCarrinho.LABEL_VALOR_TOTAL_PRODUTO_1);
+        try {
+            i.esperarElementoExistirNaTela(MeuCarrinho.LABEL_VALOR_TOTAL_PRODUTO_LAYOUT_1, 5);
+            i.validarValorTotalProdutos(MeuCarrinho.LABEL_VALOR_TOTAL_PRODUTO_LAYOUT_1);
+        } catch (Exception e) {
+            try {
+                i.validarValorTotalProdutos(MeuCarrinho.LABEL_VALOR_TOTAL_PRODUTO_LAYOUT_2);
+            } catch (Exception ex) {
+
+            }
+        }
 
     }
 

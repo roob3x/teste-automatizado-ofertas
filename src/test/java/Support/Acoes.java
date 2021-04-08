@@ -1,6 +1,5 @@
 package Support;
 
-import Order.Order;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -9,12 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import Tdm.TDM;
 
 import java.io.IOException;
-import java.sql.Driver;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
 import static Pages.Extra.HomePageExtra.TEXT_PRICE_PRODUCT;
 
@@ -34,6 +32,11 @@ Log Logger = LogFactory.getLog(Acoes.class);
     default void validarQueContemAtributoEsperado(By elemento, String texto) throws IOException {
         String nome = DriverWeb.getDriverReuser().findElement(elemento).getAttribute("placeholder");
         Assert.assertEquals(texto, nome);
+    }
+
+    default String retornarTextoDoElemento(By elemento) throws IOException {
+        String nome = DriverWeb.getDriverReuser().findElement(elemento).getText();
+        return nome;
     }
 
     default void validarPrecoPorcetagem(By elemento,int porcetagem) throws IOException {
@@ -62,7 +65,6 @@ Log Logger = LogFactory.getLog(Acoes.class);
         List<WebElement> listaelemento = DriverWeb.getDriverReuser().findElements(elemento);
         List<String> listapreco = new ArrayList<String>();
         for (WebElement element : listaelemento) {
-           // System.out.println(element.getText());
             String nome = element.getText();
             listapreco.add(nome);
         }
@@ -100,20 +102,24 @@ Log Logger = LogFactory.getLog(Acoes.class);
     }
 
     default void validarValorTotalProdutos(By elemento) throws IOException {
-        double numero = 0;
+        double somaproduto = 0;
+        double DELTA = 1e-15;
+        String numerostring;
         List<WebElement> listaelemento = DriverWeb.getDriverReuser().findElements(elemento);
         List<String> listapreco = new ArrayList<String>();
         for (WebElement element : listaelemento) {
-            // System.out.println(element.getText());
-            String nome = element.getText();
-            listapreco.add(nome);
+            if(element.getText().contains("R$")) {
+                String nome = element.getText();
+                listapreco.add(nome);
+            }
         }
         for (int i = 0; i < listapreco.size(); i++) {
-          numero = numero+ Double.parseDouble(listapreco.get(i));
-            i++;
+            if(listapreco.get(i).toString() != null) {
+                numerostring = listapreco.get(i).toString();
+                numerostring = Convert.convertDoublePrice(listapreco.get(i).toString());
+                somaproduto = somaproduto + Double.parseDouble(numerostring);
+            }
         }
-        System.out.println("numero = "+numero);
-
-
+        Assert.assertEquals("valor total nao corresponde",somaproduto, TDM.valortotalprodutos.getValortotal(),DELTA);
     }
 }
