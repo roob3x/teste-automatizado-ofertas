@@ -1,5 +1,6 @@
 package Support;
 
+import Interacao.IinteracaoSeleniumJavaWeb;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Assert;
@@ -17,7 +18,8 @@ import java.util.List;
 import static Pages.Extra.HomePageExtra.TEXT_PRICE_PRODUCT;
 
 public interface Acoes {
-Log Logger = LogFactory.getLog(Acoes.class);
+    IinteracaoSeleniumJavaWeb i = new IinteracaoSeleniumJavaWeb();
+    Log Logger = LogFactory.getLog(Acoes.class);
 
     default void esperarElementoExistirNaTela(By elemento, int timeout) throws IOException {
         WebDriverWait wait = new WebDriverWait(DriverWeb.getDriverReuser(), timeout);
@@ -39,7 +41,7 @@ Log Logger = LogFactory.getLog(Acoes.class);
         return nome;
     }
 
-    default void validarPrecoPorcetagem(By elemento,int porcetagem) throws IOException {
+    default void validarPrecoPorcetagem(By elemento, int porcetagem) throws IOException {
         double DELTA = 1e-15;
         String nome = DriverWeb.getDriverReuser().findElement(elemento).getText();
         nome = Convert.convertDoublePrice(nome);
@@ -47,9 +49,9 @@ Log Logger = LogFactory.getLog(Acoes.class);
         nome = GerenciaArquivoTxt.lerArquivoUrlPrecoTotal(nome);
         nome = Convert.convertDoublePrice(nome);
         double valordesconto = Double.parseDouble(nome);
-        valordesconto = valordesconto*porcetagem/100;
-        double valorfinal = Double.parseDouble(nome)-valordesconto;
-        Assert.assertEquals("valor correto com desconto"+porcetagem+"%",valorfinal,valor1,DELTA);
+        valordesconto = valordesconto * porcetagem / 100;
+        double valorfinal = Double.parseDouble(nome) - valordesconto;
+        Assert.assertEquals("valor correto com desconto" + porcetagem + "%", valorfinal, valor1, DELTA);
     }
 
     default void moverParaElemento(By elemento) throws IOException {
@@ -59,8 +61,8 @@ Log Logger = LogFactory.getLog(Acoes.class);
     }
 
     default void vertificaProdutoMenorValorDaListeSeleciona(By elemento, Double price) throws IOException {
-        double menorpeco = 0,maiorpreco = 0,numero = 0;
-        String locator= null,precostring,precostring2 = null;
+        double menorpeco = 0, maiorpreco = 0, numero = 0;
+        String locator = null, precostring, precostring2 = null;
 
         List<WebElement> listaelemento = DriverWeb.getDriverReuser().findElements(elemento);
         List<String> listapreco = new ArrayList<String>();
@@ -76,10 +78,10 @@ Log Logger = LogFactory.getLog(Acoes.class);
             precostring = listapreco.get(i).toString();
             precostring = Convert.convertDoublePrice(precostring);
             numero = Double.parseDouble(precostring);
-            if (numero > menorpeco && maiorpreco ==0 || numero > maiorpreco){
+            if (numero > menorpeco && maiorpreco == 0 || numero > maiorpreco) {
                 maiorpreco = numero;
             }
-            if(numero < menorpeco || numero == menorpeco){
+            if (numero < menorpeco || numero == menorpeco) {
                 menorpeco = numero;
                 precostring2 = listapreco.get(i).toString();
 
@@ -88,11 +90,11 @@ Log Logger = LogFactory.getLog(Acoes.class);
             i++;
         }
         precostring = String.valueOf(menorpeco);
-        System.out.println("TEXT_PRICE_PRODUCT"+TEXT_PRICE_PRODUCT.toString());
-        String nome = TEXT_PRICE_PRODUCT.toString().replace("[2]","[contains(text(),'"+precostring2.toString()+"')]")
-                .replace("By.xpath: ","");
+        System.out.println("TEXT_PRICE_PRODUCT" + TEXT_PRICE_PRODUCT.toString());
+        String nome = TEXT_PRICE_PRODUCT.toString().replace("[2]", "[contains(text(),'" + precostring2.toString() + "')]")
+                .replace("By.xpath: ", "");
         By locator1 = By.xpath(nome);
-        WebDriverWait wait = new WebDriverWait(DriverWeb.getDriverReuser(),10);
+        WebDriverWait wait = new WebDriverWait(DriverWeb.getDriverReuser(), 10);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator1));
         DriverWeb.getDriverReuser().findElement(locator1).click();
 
@@ -108,18 +110,18 @@ Log Logger = LogFactory.getLog(Acoes.class);
         List<WebElement> listaelemento = DriverWeb.getDriverReuser().findElements(elemento);
         List<String> listapreco = new ArrayList<String>();
         for (WebElement element : listaelemento) {
-            if(element.getText().contains("R$")) {
+            if (element.getText().contains("R$")) {
                 String nome = element.getText();
                 listapreco.add(nome);
             }
         }
         for (int i = 0; i < listapreco.size(); i++) {
-            if(listapreco.get(i).toString() != null) {
+            if (listapreco.get(i).toString() != null) {
                 numerostring = listapreco.get(i).toString();
                 numerostring = Convert.convertDoublePrice(listapreco.get(i).toString());
                 somaproduto = somaproduto + Double.parseDouble(numerostring);
             }
         }
-        Assert.assertEquals("valor total nao corresponde",somaproduto, TDM.valortotalprodutos.getValortotal(),DELTA);
+        Assert.assertEquals("valor total nao corresponde", somaproduto, TDM.valortotalprodutos.getValortotal(), DELTA);
     }
 }

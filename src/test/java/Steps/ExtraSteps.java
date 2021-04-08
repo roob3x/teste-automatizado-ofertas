@@ -2,10 +2,7 @@ package Steps;
 
 import Constants.URL_PAGE;
 import Interacao.IinteracaoSeleniumJavaWeb;
-import Pages.Extra.HomePageExtra;
-import Pages.Extra.MeuCarrinho;
-import Pages.Extra.Origem;
-import Pages.Extra.ProductDetail;
+import Pages.Extra.*;
 import Pages.Search.MainPageSearch;
 import Support.Convert;
 import io.cucumber.java.en.Given;
@@ -59,6 +56,25 @@ public class ExtraSteps {
         i.click(MainPageSearch.LABEL_TEXT_EXTRA);
 
     }
+
+    @Given("seleciona para cadastrar cliente")
+    public void selecionaParaCadastrarCliente() throws IOException, InterruptedException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(HomePageExtra.LABEL_ENTRE_OU_CADASTRE,10);
+        i.esperar1Segundo();
+        i.moverParaElemento(HomePageExtra.LABEL_ENTRE_OU_CADASTRE);
+        i.click(HomePageExtra.LABEL_CADASTRE_AQUI);
+    }
+
+    @Given("responder pergunta possui um cadastro com nao")
+    public void responderPerguntaPossuiUmCadastroComNao() throws IOException, InterruptedException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(Cadastro.RADIO_PRIMEIRA_COMPRA,10);
+        i.click(Cadastro.RADIO_PRIMEIRA_COMPRA);
+        i.esperar1Segundo();
+        i.click(Cadastro.BTN_CONTINUAR);
+    }
+
 
     @Given("procura pelo produto {string}")
     public void procuraPeloProduto(String produto) throws IOException, InterruptedException {
@@ -141,7 +157,7 @@ public class ExtraSteps {
 
     @Then("validar que a soma do produto corresponde ao valor subtotalprodutos")
     public void validarQueASomaDoProdutoCorrespondeAoValorSubtotalprodutos() throws IOException {
-        // Write code here that turns the phrase above into concrete actions
+        // Write code here that turns the phrase above into concrete action
         try {
             i.esperarElementoExistirNaTela(MeuCarrinho.LABEL_VALOR_TOTAL_PRODUTO_LAYOUT_1, 5);
             i.validarValorTotalProdutos(MeuCarrinho.LABEL_VALOR_TOTAL_PRODUTO_LAYOUT_1);
