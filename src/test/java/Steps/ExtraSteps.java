@@ -75,6 +75,72 @@ public class ExtraSteps {
         i.click(Cadastro.BTN_CONTINUAR);
     }
 
+    @Given("preencher nome completo com {string}")
+    public void preencherNomeCompletoCom(String texto) throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(Identificacao.INPUT_NOME_COMPLETO,10);
+        i.escrever(Identificacao.INPUT_NOME_COMPLETO,texto);
+        i.tab();
+    }
+
+    @Given("preencher cpf")
+    public void preencherCpf() throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(Identificacao.INPUT_CPF,10);
+        i.escrever(Identificacao.INPUT_CPF,i.geradorCPF());
+        i.tab();
+
+
+    }
+
+    @Given("preencher telefone {string}\"")
+    public void preencherTelefone(String texto) {
+
+
+    }
+
+    @Given("preencher data de nascimento\"{int}\\/{int}\\/{int}\"")
+    public void preencherDataDeNascimento(Integer int1, Integer int2, Integer int3) {
+        // Write code here that turns the phrase above into concrete actions
+
+    }
+
+    @Given("preencher genero {string}")
+    public void preencherGenero(String string) {
+        // Write code here that turns the phrase above into concrete actions
+
+    }
+
+    @Given("preencher email {string}")
+    public void preencherEmail(String string) {
+        // Write code here that turns the phrase above into concrete actions
+
+    }
+
+    @Given("preencher senha {string}")
+    public void preencherSenha(String string) {
+        // Write code here that turns the phrase above into concrete actions
+
+    }
+
+    @Given("selecionar check aceitar todas as opcoes abaixo")
+    public void selecionarCheckAceitarTodasAsOpcoesAbaixo() {
+        // Write code here that turns the phrase above into concrete actions
+
+    }
+
+    @When("selecionar botao continuar tela de identificacao")
+    public void selecionarBotaoContinuarTelaDeIdentificacao() {
+        // Write code here that turns the phrase above into concrete actions
+
+    }
+
+    @Then("validar que o pop salvar senha foi exibido")
+    public void validarQueOPopSalvarSenhaFoiExibido() {
+        // Write code here that turns the phrase above into concrete actions
+
+    }
+
 
     @Given("procura pelo produto {string}")
     public void procuraPeloProduto(String produto) throws IOException, InterruptedException {
