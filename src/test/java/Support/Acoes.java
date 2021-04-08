@@ -98,4 +98,22 @@ Log Logger = LogFactory.getLog(Acoes.class);
         System.out.println("maior preco =" + maiorpreco);
         precostring2 = GerenciaArquivoTxt.criarArquivoPrecoTotal(precostring2);
     }
+
+    default void validarValorTotalProdutos(By elemento) throws IOException {
+        double numero = 0;
+        List<WebElement> listaelemento = DriverWeb.getDriverReuser().findElements(elemento);
+        List<String> listapreco = new ArrayList<String>();
+        for (WebElement element : listaelemento) {
+            // System.out.println(element.getText());
+            String nome = element.getText();
+            listapreco.add(nome);
+        }
+        for (int i = 0; i < listapreco.size(); i++) {
+          numero = numero+ Double.parseDouble(listapreco.get(i));
+            i++;
+        }
+        System.out.println("numero = "+numero);
+
+
+    }
 }
