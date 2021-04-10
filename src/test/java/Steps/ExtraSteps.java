@@ -13,7 +13,6 @@ import Tdm.TDM;
 import java.io.IOException;
 
 
-
 public class ExtraSteps {
     IinteracaoSeleniumJavaWeb i = new IinteracaoSeleniumJavaWeb();
 
@@ -60,7 +59,7 @@ public class ExtraSteps {
     @Given("seleciona para cadastrar cliente")
     public void selecionaParaCadastrarCliente() throws IOException, InterruptedException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(HomePageExtra.LABEL_ENTRE_OU_CADASTRE,10);
+        i.esperarElementoExistirNaTela(HomePageExtra.LABEL_ENTRE_OU_CADASTRE, 10);
         i.esperar1Segundo();
         i.moverParaElemento(HomePageExtra.LABEL_ENTRE_OU_CADASTRE);
         i.click(HomePageExtra.LABEL_CADASTRE_AQUI);
@@ -69,7 +68,7 @@ public class ExtraSteps {
     @Given("responder pergunta possui um cadastro com nao")
     public void responderPerguntaPossuiUmCadastroComNao() throws IOException, InterruptedException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(Cadastro.RADIO_PRIMEIRA_COMPRA,10);
+        i.esperarElementoExistirNaTela(Cadastro.RADIO_PRIMEIRA_COMPRA, 10);
         i.click(Cadastro.RADIO_PRIMEIRA_COMPRA);
         i.esperar1Segundo();
         i.click(Cadastro.BTN_CONTINUAR);
@@ -78,68 +77,113 @@ public class ExtraSteps {
     @Given("preencher nome completo com {string}")
     public void preencherNomeCompletoCom(String texto) throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(Identificacao.INPUT_NOME_COMPLETO,10);
-        i.escrever(Identificacao.INPUT_NOME_COMPLETO,texto);
+        i.esperarElementoExistirNaTela(Identificacao.INPUT_NOME_COMPLETO, 10);
+        i.escrever(Identificacao.INPUT_NOME_COMPLETO, texto);
         i.tab();
     }
 
     @Given("preencher cpf")
     public void preencherCpf() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(Identificacao.INPUT_CPF,10);
-        i.escrever(Identificacao.INPUT_CPF,i.geradorCPF());
+        i.esperarElementoExistirNaTela(Identificacao.INPUT_CPF, 10);
+        i.escrever(Identificacao.INPUT_CPF, i.geradorCPF());
         i.tab();
 
 
     }
 
     @Given("preencher telefone {string}\"")
-    public void preencherTelefone(String texto) {
-
+    public void preencherTelefone(String texto) throws IOException, InterruptedException {
+        String ddd = texto.substring(0, 2);
+        String telefone = texto.substring(2, 11);
+        i.esperarElementoExistirNaTela(Identificacao.INPUT_TELEFONE_1_DDD, 10);
+        i.escrever(Identificacao.INPUT_TELEFONE_1_DDD, ddd);
+        i.esperar1Segundo();
+        i.escrever(Identificacao.INPUT_TELEFONE_1_NUMERO, telefone);
 
     }
 
-    @Given("preencher data de nascimento\"{int}\\/{int}\\/{int}\"")
-    public void preencherDataDeNascimento(Integer int1, Integer int2, Integer int3) {
+    @Given("preencher data de nascimento {string}")
+    public void preencherDataDeNascimento(String texto) throws IOException, InterruptedException {
         // Write code here that turns the phrase above into concrete actions
+        String dia = texto.substring(0, 2);
+        String mes = texto.substring(3, 5);
+        String ano = texto.substring(6, 10);
+        i.esperarElementoExistirNaTela(Identificacao.INPUT_DATANASC_DIA, 10);
+        i.escrever(Identificacao.INPUT_DATANASC_DIA, dia);
+        i.esperar1Segundo();
+        i.escrever(Identificacao.INPUT_DATANASC_MES, mes);
+        i.esperar1Segundo();
+        i.escrever(Identificacao.INPUT_DATANASC_ANO, ano);
+        i.tab();
 
     }
+
 
     @Given("preencher genero {string}")
-    public void preencherGenero(String string) {
+    public void preencherGenero(String texto) throws IOException, InterruptedException {
         // Write code here that turns the phrase above into concrete actions
+        i.esperar1Segundo();
+        if (texto.equals("Masculino")) {
+            i.click(Identificacao.RADIO_GENERO_MASCULINO);
+        } else {
+            i.click(Identificacao.RADIO_GENERO_FEMININO);
+        }
 
     }
 
     @Given("preencher email {string}")
-    public void preencherEmail(String string) {
+    public void preencherEmail(String texto) throws IOException {
         // Write code here that turns the phrase above into concrete actions
-
+        i.esperarElementoExistirNaTela(Identificacao.INPUT_EMAIL, 10);
+        i.escrever(Identificacao.INPUT_EMAIL, i.geradorCPF()+texto);
+        String nome = i.retornarValueDoElemento(Identificacao.INPUT_EMAIL);
+        i.tab();
+        i.escreverRobot(nome);
+        System.out.println("nome = "+nome);
+        i.tab();
     }
 
     @Given("preencher senha {string}")
-    public void preencherSenha(String string) {
+    public void preencherSenha(String texto) throws IOException {
         // Write code here that turns the phrase above into concrete actions
-
+        i.esperarElementoExistirNaTela(Identificacao.INPUT_SENHA, 10);
+        i.escrever(Identificacao.INPUT_SENHA, texto);
+        i.tab();
+        i.escreverRobot(texto);
+        i.tab();
     }
 
     @Given("selecionar check aceitar todas as opcoes abaixo")
-    public void selecionarCheckAceitarTodasAsOpcoesAbaixo() {
+    public void selecionarCheckAceitarTodasAsOpcoesAbaixo() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-
+        i.esperarElementoExistirNaTela(Identificacao.CHECK_ACEITAR_TDS_OCPES, 10);
+        i.click(Identificacao.CHECK_ACEITAR_TDS_OCPES);
     }
 
     @When("selecionar botao continuar tela de identificacao")
-    public void selecionarBotaoContinuarTelaDeIdentificacao() {
+    public void selecionarBotaoContinuarTelaDeIdentificacao() throws InterruptedException, IOException {
         // Write code here that turns the phrase above into concrete actions
+        i.esperar1Segundo();
+        i.descerFimDaPagina();
+        i.esperar1Segundo();
+        i.click(Identificacao.BTN_CONTINUAR);
+
 
     }
 
-    @Then("validar que o pop salvar senha foi exibido")
-    public void validarQueOPopSalvarSenhaFoiExibido() {
+    @Then("validar que foi exibido recaptcha")
+    public void validarQueFoiExibidoRecaptcha() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-
+        i.esperarElementoExistirNaTela(Identificacao.LABEL_RECAPTCHA,10);
     }
+    @Then("validar que foi para tela inicial e exibe popup salvar senha para fechar")
+    public void validarQueFoiParaTelaInicialEExibePopupSalvarSenhaParaFechar() throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(HomePageExtra.INPUT_HOME_BUSCA_EXTRA,10);
+        //i.fecharPopUp();
+    }
+
 
 
     @Given("procura pelo produto {string}")

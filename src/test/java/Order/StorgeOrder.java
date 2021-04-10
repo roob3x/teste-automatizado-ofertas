@@ -65,7 +65,10 @@ public class StorgeOrder extends Order {
         screen.type(texto);
     }
 
-
+    @Override
+    public void fecharPopUp() throws IOException {
+        DriverWeb.getDriverReuser().switchTo().alert().dismiss();
+    }
 
 
 }

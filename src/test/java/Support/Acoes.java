@@ -41,6 +41,11 @@ public interface Acoes {
         return nome;
     }
 
+    default String retornarValueDoElemento(By elemento) throws IOException {
+        String nome = DriverWeb.getDriverReuser().findElement(elemento).getAttribute("value");
+        return nome;
+    }
+
     default void validarPrecoPorcetagem(By elemento, int porcetagem) throws IOException {
         double DELTA = 1e-15;
         String nome = DriverWeb.getDriverReuser().findElement(elemento).getText();

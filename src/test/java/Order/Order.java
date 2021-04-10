@@ -17,5 +17,6 @@ public abstract class Order {
     public abstract void enter();
     public abstract void esperar1Segundo() throws InterruptedException;
     public abstract void escreverRobot(String texto);
+    public abstract void fecharPopUp() throws IOException;
 
 }

@@ -55,7 +55,11 @@ public class DriverWeb {
 
         return driverReuse;
     }
-
-
+    public static void endSession() {
+        if (driverReuse != null) {
+            driverReuse.quit();
+            driverReuse = null;
+        }
+    }
 
 }

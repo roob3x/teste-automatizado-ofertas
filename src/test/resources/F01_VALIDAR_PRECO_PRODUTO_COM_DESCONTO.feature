@@ -1,5 +1,5 @@
 #language en
-@Rob1
+@Rob
 Feature: F01_VALIDAR_PRECO_PRODUTO
 
   Scenario Outline: valida que o valor do produto está com o valor correto e  7% de desconto

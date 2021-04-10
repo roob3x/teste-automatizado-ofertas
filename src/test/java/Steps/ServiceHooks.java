@@ -23,4 +23,10 @@ public class ServiceHooks {
         DriverWeb.getDriverReuser();
     }
 
+    @After
+    public void tearDown(){
+        //System.out.println("fechou aplicacao");
+        DriverWeb.endSession();
+    }
+
 }

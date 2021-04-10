@@ -1,5 +1,5 @@
 #language en
-@Rob2
+@Rob
 Feature: F02_VALIDAR_PRECO_TOTAL_PRODUTOS
 
   Scenario: valida que o valor total de compra esta equivalente a quantidade de produto
