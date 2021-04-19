@@ -30,6 +30,7 @@ public class DriverWeb {
             options.setExperimentalOption("useAutomationExtension", false);
             options.addArguments("--disable-blink-features");
             options.addArguments("--disable-blink-features=AutomationControlled");
+            options.addArguments("--disable-notifications");
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("source", "Object.defineProperty(navigator, 'webdriver', { get: () => undefined })");
             //WebDriver browser = new ChromeDriver(options);

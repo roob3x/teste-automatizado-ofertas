@@ -24,7 +24,7 @@ public class ServiceHooks {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown(Scenario scenario){
         //System.out.println("fechou aplicacao");
         DriverWeb.endSession();
     }
