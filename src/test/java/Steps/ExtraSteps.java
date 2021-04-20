@@ -39,7 +39,7 @@ public class ExtraSteps {
     @When("product is on sale less than {double}")
     public void productIsOnSaleLessThan(Double price) throws IOException {
         i.esperarElementoExistirNaTela(HomePageExtra.TEXT_PRICE_PRODUCT, 30);
-        i.vertificaProdutoMenorValorDaListeSeleciona(HomePageExtra.TEXT_PRICE_PRODUCT, price);
+        i.vertificaProdutoMenorValorDaListeSeleciona(HomePageExtra.TEXT_PRICE_PRODUCT);
         // Write code here that turns the phrase above into concrete actions
 
     }
@@ -77,16 +77,16 @@ public class ExtraSteps {
     @Given("preencher nome completo com {string}")
     public void preencherNomeCompletoCom(String texto) throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(Identificacao.INPUT_NOME_COMPLETO, 10);
-        i.escrever(Identificacao.INPUT_NOME_COMPLETO, texto);
+        i.esperarElementoExistirNaTela(IdentificacaoCadastro.INPUT_NOME_COMPLETO, 10);
+        i.escrever(IdentificacaoCadastro.INPUT_NOME_COMPLETO, texto);
         i.tab();
     }
 
     @Given("preencher cpf")
     public void preencherCpf() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(Identificacao.INPUT_CPF, 10);
-        i.escrever(Identificacao.INPUT_CPF, i.geradorCPF());
+        i.esperarElementoExistirNaTela(IdentificacaoCadastro.INPUT_CPF, 10);
+        i.escrever(IdentificacaoCadastro.INPUT_CPF, i.geradorCPF());
         i.tab();
 
 
@@ -96,10 +96,10 @@ public class ExtraSteps {
     public void preencherTelefone(String texto) throws IOException, InterruptedException {
         String ddd = texto.substring(0, 2);
         String telefone = texto.substring(2, 11);
-        i.esperarElementoExistirNaTela(Identificacao.INPUT_TELEFONE_1_DDD, 10);
-        i.escrever(Identificacao.INPUT_TELEFONE_1_DDD, ddd);
+        i.esperarElementoExistirNaTela(IdentificacaoCadastro.INPUT_TELEFONE_1_DDD, 10);
+        i.escrever(IdentificacaoCadastro.INPUT_TELEFONE_1_DDD, ddd);
         i.esperar1Segundo();
-        i.escrever(Identificacao.INPUT_TELEFONE_1_NUMERO, telefone);
+        i.escrever(IdentificacaoCadastro.INPUT_TELEFONE_1_NUMERO, telefone);
 
     }
 
@@ -109,12 +109,12 @@ public class ExtraSteps {
         String dia = texto.substring(0, 2);
         String mes = texto.substring(3, 5);
         String ano = texto.substring(6, 10);
-        i.esperarElementoExistirNaTela(Identificacao.INPUT_DATANASC_DIA, 10);
-        i.escrever(Identificacao.INPUT_DATANASC_DIA, dia);
+        i.esperarElementoExistirNaTela(IdentificacaoCadastro.INPUT_DATANASC_DIA, 10);
+        i.escrever(IdentificacaoCadastro.INPUT_DATANASC_DIA, dia);
         i.esperar1Segundo();
-        i.escrever(Identificacao.INPUT_DATANASC_MES, mes);
+        i.escrever(IdentificacaoCadastro.INPUT_DATANASC_MES, mes);
         i.esperar1Segundo();
-        i.escrever(Identificacao.INPUT_DATANASC_ANO, ano);
+        i.escrever(IdentificacaoCadastro.INPUT_DATANASC_ANO, ano);
         i.tab();
 
     }
@@ -125,9 +125,9 @@ public class ExtraSteps {
         // Write code here that turns the phrase above into concrete actions
         i.esperar1Segundo();
         if (texto.equals("Masculino")) {
-            i.click(Identificacao.RADIO_GENERO_MASCULINO);
+            i.click(IdentificacaoCadastro.RADIO_GENERO_MASCULINO);
         } else {
-            i.click(Identificacao.RADIO_GENERO_FEMININO);
+            i.click(IdentificacaoCadastro.RADIO_GENERO_FEMININO);
         }
 
     }
@@ -135,20 +135,20 @@ public class ExtraSteps {
     @Given("preencher email {string}")
     public void preencherEmail(String texto) throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(Identificacao.INPUT_EMAIL, 10);
-        i.escrever(Identificacao.INPUT_EMAIL, i.geradorCPF()+texto);
-        String nome = i.retornarValueDoElemento(Identificacao.INPUT_EMAIL);
+        i.esperarElementoExistirNaTela(IdentificacaoCadastro.INPUT_EMAIL, 10);
+        i.escrever(IdentificacaoCadastro.INPUT_EMAIL, i.geradorCPF() + texto);
+        String nome = i.retornarValueDoElemento(IdentificacaoCadastro.INPUT_EMAIL);
         i.tab();
         i.escreverRobot(nome);
-        System.out.println("nome = "+nome);
+        System.out.println("nome = " + nome);
         i.tab();
     }
 
     @Given("preencher senha {string}")
     public void preencherSenha(String texto) throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(Identificacao.INPUT_SENHA, 10);
-        i.escrever(Identificacao.INPUT_SENHA, texto);
+        i.esperarElementoExistirNaTela(IdentificacaoCadastro.INPUT_SENHA, 10);
+        i.escrever(IdentificacaoCadastro.INPUT_SENHA, texto);
         i.tab();
         i.escreverRobot(texto);
         i.tab();
@@ -157,8 +157,8 @@ public class ExtraSteps {
     @Given("selecionar check aceitar todas as opcoes abaixo")
     public void selecionarCheckAceitarTodasAsOpcoesAbaixo() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(Identificacao.CHECK_ACEITAR_TDS_OCPES, 10);
-        i.click(Identificacao.CHECK_ACEITAR_TDS_OCPES);
+        i.esperarElementoExistirNaTela(IdentificacaoCadastro.CHECK_ACEITAR_TDS_OCPES, 10);
+        i.click(IdentificacaoCadastro.CHECK_ACEITAR_TDS_OCPES);
     }
 
     @When("selecionar botao continuar tela de identificacao")
@@ -167,7 +167,7 @@ public class ExtraSteps {
         i.esperar1Segundo();
         i.descerFimDaPagina();
         i.esperar1Segundo();
-        i.click(Identificacao.BTN_CONTINUAR);
+        i.click(IdentificacaoCadastro.BTN_CONTINUAR);
 
 
     }
@@ -175,15 +175,15 @@ public class ExtraSteps {
     @Then("validar que foi exibido recaptcha")
     public void validarQueFoiExibidoRecaptcha() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(Identificacao.LABEL_RECAPTCHA,10);
+        i.esperarElementoExistirNaTela(IdentificacaoCadastro.LABEL_RECAPTCHA, 10);
     }
+
     @Then("validar que foi para tela inicial e exibe popup salvar senha para fechar")
     public void validarQueFoiParaTelaInicialEExibePopupSalvarSenhaParaFechar() throws IOException {
         // Write code here that turns the phrase above into concrete actions
-        i.esperarElementoExistirNaTela(HomePageExtra.INPUT_HOME_BUSCA_EXTRA,10);
+        i.esperarElementoExistirNaTela(HomePageExtra.INPUT_HOME_BUSCA_EXTRA, 10);
         //i.fecharPopUp();
     }
-
 
 
     @Given("procura pelo produto {string}")
@@ -197,11 +197,11 @@ public class ExtraSteps {
     }
 
 
-    @When("seleciona o produto com valor mais barato {double}")
-    public void selecionaOProdutoComValorMaisBarato(Double normalpŕice) throws IOException {
+    @When("seleciona o produto com valor mais barato")
+    public void selecionaOProdutoComValorMaisBarato() throws IOException {
         // Write code here that turns the phrase above into concrete actions
         i.esperarElementoExistirNaTela(HomePageExtra.TEXT_PRICE_PRODUCT, 30);
-        i.vertificaProdutoMenorValorDaListeSeleciona(HomePageExtra.TEXT_PRICE_PRODUCT, normalpŕice);
+        i.vertificaProdutoMenorValorDaListeSeleciona(HomePageExtra.TEXT_PRICE_PRODUCT);
     }
 
 
@@ -230,17 +230,34 @@ public class ExtraSteps {
             i.esperarElementoExistirNaTela(MeuCarrinho.LABEL_VALOR_SUBTOTAL_PRODUTO_1, 10);
             nome = i.retornarTextoDoElemento(MeuCarrinho.LABEL_VALOR_SUBTOTAL_PRODUTO_1);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             try {
                 nome = i.retornarTextoDoElemento(MeuCarrinho.LABEL_VALOR_SUBTOTAL_PRODUTO_2);
 
             } catch (Exception ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
         }
         nome = Convert.convertDoublePrice(nome);
         TDM.valortotalprodutos.setValortotal(Double.parseDouble(nome));
         //System.out.println("valor total = "+TDM.valortotalprodutos.getValortotal());
+    }
+
+    @When("o valor do produto estiver menor igual a {double}")
+    public void oValorDoProdutoEstiverMenorIgualA(Double preco) throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        if (TDM.valortotalprodutos.getValortotal() < preco) {
+            try {
+                i.click(MeuCarrinho.BTN_CONCLUIR_COMPRA);
+            } catch (Exception e) {
+                try {
+                    i.click(MeuCarrinho.BTN_FINALIZAR_COMPRA);
+                } catch (Exception ex) {
+
+                }
+            }
+        }
+
     }
 
     @Given("Selecionar botao continuar")
@@ -279,6 +296,77 @@ public class ExtraSteps {
             }
         }
 
+    }
+
+    @When("preencher campo login")
+    public void preencherCampoLogin() throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(IdentificacaoLogin.INPUT_EMAIL_LOGIN, 10);
+        i.escrever(IdentificacaoLogin.INPUT_EMAIL_LOGIN, TDM.dadosUsuario.getLogin());
+    }
+
+    @When("preencher campo senha")
+    public void preencherCampoSenha() throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(IdentificacaoLogin.INPUT_SENHA_LOGIN, 10);
+        i.escrever(IdentificacaoLogin.INPUT_SENHA_LOGIN, TDM.dadosUsuario.getSenha());
+    }
+
+    @When("clicar no botao continuar tela idetificacao login")
+    public void clicarNoBotaoContinuarTelaIdetificacaoLogin() throws IOException, InterruptedException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(IdentificacaoLogin.BTN_CONTINUAR_LOGIN, 10);
+        //i.click(IdentificacaoLogin.BTN_CONTINUAR_LOGIN);
+        // i.esperar1Segundo();
+        i.enter();
+    }
+
+    @When("finalizar compra em meu carrinho")
+    public void finalizarCompraEmMeuCarrinho() throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        try {
+            i.esperarElementoExistirNaTela(MeuCarrinho.BTN_FINALIZAR_COMPRA, 10);
+            i.click(MeuCarrinho.BTN_FINALIZAR_COMPRA);
+        }
+        catch (Exception e){
+            try{
+                i.click(MeuCarrinho.BTN_CONCLUIR_COMPRA);
+            }
+            catch (Exception ex){
+
+            }
+        }
+    }
+
+    @When("selecionar ir para pagamento")
+    public void selecionarIrParaPagamento() throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(Checkout.BTN_IR_PAGAMENTO, 10);
+        i.click(Checkout.BTN_IR_PAGAMENTO);
+    }
+
+    @When("selecionar boleto como forma de pagamento")
+    public void selecionarBoletoComoFormaDePagamento() throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+        i.esperarElementoExistirNaTela(Checkout.RADIO_BOLETO_BANCARIO, 10);
+        i.click(Checkout.RADIO_BOLETO_BANCARIO);
+    }
+
+    @When("valor total de compra na tela de pagamento for menor ou igual a {double}")
+    public void valorTotalDeCompraNaTelaDePagamentoForMenorOuIgualA(Double price) throws IOException {
+        // Write code here that turns the phrase above into concrete actions
+       String nome = i.retornarTextoDoElemento(Checkout.LABEL_VALOR_TOTAL_PRODUTO);
+       nome = Convert.convertDoublePrice(nome);
+       double valor = Double.parseDouble(nome);
+       if(valor< price){
+           System.out.println("produto esta em promocao. será realizado a compra");
+       }
+
+    }
+
+    @Then("finalizar compra")
+    public void finalizarCompra() {
+        // Write code here that turns the phrase above into concrete actions
     }
 
 

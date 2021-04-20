@@ -10,4 +10,5 @@ public class MeuCarrinho {
     public static By BTN_CONTINUAR_COMPRANDO_1 = By.xpath("//*[contains(text(), 'Continuar comprando')]");
     public static By BTN_CONTINUAR_COMPRANDO_2 = By.xpath("//*[contains(text(), 'Comprar mais produtos')]");
     public static By BTN_FINALIZAR_COMPRA = By.xpath("//div[contains(text(), 'Finalizar compra')]");
+    public static By BTN_CONCLUIR_COMPRA = By.xpath("//*[contains(text(), 'Concluir')]");
 }

@@ -65,7 +65,7 @@ public interface Acoes {
         action.moveToElement(we).build().perform();
     }
 
-    default void vertificaProdutoMenorValorDaListeSeleciona(By elemento, Double price) throws IOException {
+    default void vertificaProdutoMenorValorDaListeSeleciona(By elemento) throws IOException {
         double menorpeco = 0, maiorpreco = 0, numero = 0;
         String locator = null, precostring, precostring2 = null;
 

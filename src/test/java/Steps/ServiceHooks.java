@@ -15,6 +15,8 @@ public class ServiceHooks {
     public static Scenario scenario;
     @Before
     public void setUp(Scenario scenario) throws IOException {
+        GerenciaArquivoTxt gerenciaArquivoTxt = new GerenciaArquivoTxt();
+        gerenciaArquivoTxt.lerArquivoDadosCliente();
         ServiceHooks.scenario = scenario;
         StorageOrderReuse.apagarArquivoSessionId();
         StorageOrderReuse.apagarArquivoURL();

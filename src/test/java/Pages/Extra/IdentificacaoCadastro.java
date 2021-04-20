@@ -2,7 +2,7 @@ package Pages.Extra;
 
 import org.openqa.selenium.By;
 
-public class Identificacao {
+public class IdentificacaoCadastro {
     public static By INPUT_NOME_COMPLETO = By.id("NomeCompleto");
     public static By INPUT_CPF = By.id("Cpf");
     public static By INPUT_TELEFONE_1_DDD = By.xpath("//p[@class=\"grp fMulti fTel fTel\"]//input[@class=\"ddd\"]");
